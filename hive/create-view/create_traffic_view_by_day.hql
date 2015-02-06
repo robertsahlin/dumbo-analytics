@@ -1,0 +1,32 @@
+CREATE VIEW traffic_view_by_day AS
+SELECT 
+date,
+status_code,
+user_agent,
+landing_page,
+next_path,
+referrer,
+domain,
+page_type,
+medium,
+source,
+campaign,
+search_phrase,
+SUM(bounce) as bounces,
+COUNT(*) as traffic_rows,
+COUNT(distinct session_id) as sessions,
+COUNT(distinct visitor_id) as visitors,
+SUM(bounce)/COUNT(session_id) as bounce_rate
+FROM traffic_view GROUP BY 
+date,
+status_code,
+user_agent,
+landing_page,
+next_path,
+referrer,
+domain,
+page_type,
+medium,
+source,
+campaign,
+search_phrase;
